@@ -1,0 +1,19 @@
+create a dictionary of free tiles
+
+use pq to track total no of tiles left
+
+1) place piece at tile for all possible places
+no of free spaces left
+
+all pieces in a list <-- to iterate (determine variable to assign to)
+
+store states as pq (2)
+state: (pop out most no of pieces on board and most no of free tiles)
+3. no of free tiles
+4. dic of free tiles
+5. total no of pieces placed
+6. path --> add check if attacking tiles in area with pieces
+inference:
+if no of free tiles == 0, discard
+
+order of adding add queen, empress, princess, rook, bishop, knight, king, ferz

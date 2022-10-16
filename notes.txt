@@ -1,0 +1,85 @@
+1) replace movement with grids instead of generating new pieces
+(y, x)
+Local search (task 1)
+2) action --> remove 1 piece from the board
+
+2) heuristic function --> no of threatened reduced
+2nd:
+count from left to right, no of pieces it is threatening 
+(don't double count)
+(cond: if attacking piece same type, don't count)
+keep dictonary of all piece's position
+
+normal hill-climbing
+
+neighbour = lowest no of threatened pieces
+if(neighbour <= curr)
+	return curr (at local min)
+curr = neighbour
+
+state:
+row
+column
+curr_grid
+pieces = pieces.sort(by x column, y row)
+
+get heuristic:
+score = 0
+attacked = {[] for piece in pieces}
+for every piece in pieces:
+actions = piece.get_action()
+bool = position in grid == -2
+if (bool) and !(attacked[piece] not contain "position in grid") #rmb order reversed here
+  score++
+  attacked["position in grid"] = piece
+
+get transistion:
+  transistion = []
+  for piece in pieces:
+    curr_pieces = pieces.copy()
+    curr_pieces.remove(piece)
+    curr_state = new State(row, col, curr_grid, pieces)
+    transisiton.add(curr_state)
+  high = max(transistion.get_heuristic())
+  return high
+
+
+
+search:
+search(rows, cols, grid, pieces, k)
+
+block grid with curr pieces position (-2) #can use -2, technically rook attacking 2 in a file is considered as 2 pts
+
+start_state(row, col, grid pieces)
+
+failed = false
+
+while(len(start_state.get_pieces) > k):
+  neighbour = start_state.get_transistion()
+  if(neighbour <= curr)
+          failed = true
+	  return curr (at local min) ## break
+  start_state = neighbour
+
+
+
+
+
+CSP (task 2)
+State representation: 
+variables: pieces
+Domain: tiles of grid
+
+Goal Test: 
+no threatening (terminate if theaten)
+and No more assignment
+
+Transistion:
+move from state a to state b
+
+Inference:
+-once we place a piece we create "obsticles" for where it can attack
+
+
+remove piece that is attacking most amount of pieces
+
